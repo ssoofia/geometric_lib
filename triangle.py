@@ -1,5 +1,11 @@
 def area(a, h): 
-    return 1/2 * a * h
+    if a <= 0 or h <= 0:
+        return False
+    return a * h / 2
 
 def perimeter(a, b, c): 
-    return a + b + c 
+    if a <= 0 or b <= 0 or c <= 0:
+        return False
+    if (a + b <= c) or (a + c <= b) or (b + c <= a):
+        return False
+    return a + b + c

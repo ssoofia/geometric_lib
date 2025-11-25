@@ -34,9 +34,13 @@
 import math
 
 def area(r):
+    if r <= 0:
+        return False
     return math.pi * r * r
 
 def perimeter(r):
+    if r <= 0:
+        return False
     return 2 * math.pi * r
 ```
 
@@ -44,9 +48,13 @@ def perimeter(r):
 
 ```python
 def area(a, b): 
+    if a <= 0 or b <= 0:
+        return False
     return a * b 
 
 def perimeter(a, b): 
+    if a <= 0 or b <= 0:
+        return False
     return 2 * (a + b)
 ```
 
@@ -54,20 +62,32 @@ def perimeter(a, b):
 
 ```python
 def area(a):
+    if a <= 0:
+        return False
     return a * a
 
 def perimeter(a):
+    if a <= 0:
+        return False
     return 4 * a
+
 ```
 
 ### triangle.py 
 
 ```python
 def area(a, h): 
-    return 1/2 * a * h 
+    if a <= 0 or h <= 0:
+        return False
+    return a * h / 2
 
 def perimeter(a, b, c): 
-    return a + b + c 
+    if a <= 0 or b <= 0 or c <= 0:
+        return False
+    if (a + b <= c) or (a + c <= b) or (b + c <= a):
+        return False
+    return a + b + c
+
 ```
 
 ## 4. Стратегия тестирования
@@ -80,6 +100,7 @@ def perimeter(a, b, c):
 
 - **Позитивное тестирование** 
 
+- **Негативное тестирование** 
 
 
 ### Инструменты тестирования:
@@ -99,7 +120,7 @@ def perimeter(a, b, c):
 ### Критерии качества:
 - **Точность вычислений** - соответствие математическим формулам
 - **Надежность** - стабильная работа при различных входных данных
-- **Полнота тестирования** - все функции протестированы
+- **Полнота тестирования** - все функции протестированы 
 
 ## 6. Ожидаемые результаты
 
@@ -112,15 +133,16 @@ def perimeter(a, b, c):
 
 ## Запуск тестов
 
-```bash
+```py
 # Запуск всех тестов
-python3 -m unittest tests.py
+python3 -m unittest discover
 
 # Установка библиотеки coverage для измерения покрытия кода тестами
 pip install coverage
 
 # Запуск тестов и одновременно измерение покрытия кода тестами
-coverage run -m unittest tests.py
+coverage run -m unittest discover
 
 # Просмотр отчета о покрытии кода в терминале.
 coverage report
+```
