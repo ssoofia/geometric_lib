@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13.2'
+
+    - name: Run unit tests
+      run: python -m unittest discover -v
+      
+    - name: Unit tests are completed
+      run: echo "Unit tests passed"
